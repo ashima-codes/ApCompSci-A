@@ -7,9 +7,7 @@ import kareltherobot.*;
 public class Driver implements Directions {
 // declared here so it is visible in all the methods!! 
 // It will be assigned a value in the getInfo method
-	private static Robot roomba; 
-		Robot rob = new Robot(7, 6, East, 9);
-
+	private static Robot roomba;
 	// You will add very many variables!!
 
 	
@@ -46,7 +44,29 @@ public class Driver implements Directions {
 
 		// the line below causes a null pointer exception
 		// what is that and why are we getting it?
-		roomba.move();
+		roomba = new Robot(7, 6, East, 9);
+		while (true){
+			while (roomba.frontIsClear() == true){
+				roomba.move();
+		}
+			roomba.turnLeft();
+			roomba.move();
+			roomba.turnLeft();
+			while (roomba.frontIsClear() == true){
+				roomba.move();
+			}
+			roomba.turnLeft();
+			roomba.turnLeft();
+			roomba.turnLeft();
+			roomba.move();
+
+
+
+		
+
+		}
+
+	
 
 
   
@@ -60,7 +80,7 @@ public class Driver implements Directions {
 	 * this info in the console (boring) or you can present using JOptionPane (cool!)
 	 */
 
-    System.out.println("The biggest pile was ");
+   // System.out.println("The biggest pile was ");
 
 
 
@@ -72,3 +92,5 @@ public class Driver implements Directions {
   }
 
 }
+
+
