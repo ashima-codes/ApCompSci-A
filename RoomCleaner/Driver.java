@@ -48,6 +48,10 @@ public class Driver implements Directions {
 		while (true){
 			while (roomba.frontIsClear() == true){
 				roomba.move();
+				if (roomba.nextToABeeper()== true){
+					roomba.pickBeeper();
+				}
+
 		}
 			roomba.turnLeft();
 			roomba.move();
@@ -55,10 +59,16 @@ public class Driver implements Directions {
 			while (roomba.frontIsClear() == true){
 				roomba.move();
 			}
+			if (roomba.nextToABeeper()== true){
+				roomba.pickBeeper();
+			}
 			roomba.turnLeft();
 			roomba.turnLeft();
 			roomba.turnLeft();
 			roomba.move();
+			roomba.turnLeft();
+			roomba.turnLeft();
+			roomba.turnLeft();
 
 
 
@@ -92,5 +102,7 @@ public class Driver implements Directions {
   }
 
 }
+
+
 
 
