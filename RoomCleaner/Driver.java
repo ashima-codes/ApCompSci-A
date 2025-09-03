@@ -7,6 +7,11 @@ import kareltherobot.*;
 public class Driver implements Directions {
 // declared here so it is visible in all the methods!! 
 // It will be assigned a value in the getInfo method
+    public static void turnRight() {
+		roomba.turnLeft();
+		roomba.turnLeft();
+		roomba.turnLeft();
+	}
 	private static Robot roomba;
 	// You will add very many variables!!
 
@@ -48,7 +53,7 @@ public class Driver implements Directions {
 		while (true){
 			while (roomba.frontIsClear() == true){
 				roomba.move();
-				if (roomba.nextToABeeper()== true){
+				while (roomba.nextToABeeper()== true){
 					roomba.pickBeeper();
 				}
 
@@ -58,17 +63,13 @@ public class Driver implements Directions {
 			roomba.turnLeft();
 			while (roomba.frontIsClear() == true){
 				roomba.move();
+				while (roomba.nextToABeeper()== true){
+					roomba.pickBeeper();
+				}
 			}
-			if (roomba.nextToABeeper()== true){
-				roomba.pickBeeper();
-			}
-			roomba.turnLeft();
-			roomba.turnLeft();
-			roomba.turnLeft();
+			turnRight();
 			roomba.move();
-			roomba.turnLeft();
-			roomba.turnLeft();
-			roomba.turnLeft();
+			turnRight();
 
 
 
@@ -102,7 +103,4 @@ public class Driver implements Directions {
   }
 
 }
-
-
-
 
