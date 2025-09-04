@@ -19,6 +19,19 @@ public class Driver implements Directions {
 	public static void main(String[] args) {
 		// LEAVE THIS ALONE!!!!!!
 		Driver d = new Driver();
+		Scanner scanner = new Scanner(System.in);
+
+		System.out.print("Enter the strret number: ");
+        String street = scanner.nextLine();
+    	int numStreet = Integer.parseInt(street);
+		//System.out.println(street);
+		System.out.print("Enter the avenue number: ");
+        String avenue = scanner.nextLine();
+		int numAvenue = Integer.parseInt(avenue);
+		//System.out.println(avenue);
+
+		int beeperCounter = 0;
+
 
 
   /**
@@ -39,6 +52,7 @@ public class Driver implements Directions {
 		World.readWorld(wrldName);
     World.setVisible(true);
 
+
     
 
 
@@ -49,38 +63,72 @@ public class Driver implements Directions {
 
 		// the line below causes a null pointer exception
 		// what is that and why are we getting it?
-		roomba = new Robot(7, 6, East, 9);
+		roomba = new Robot(numStreet, numAvenue, East, 0);
 		while (true){
 			while (roomba.frontIsClear() == true){
 				roomba.move();
 				while (roomba.nextToABeeper()== true){
 					roomba.pickBeeper();
+					beeperCounter ++;
 				}
 
 		}
-			roomba.turnLeft();
-			roomba.move();
-			roomba.turnLeft();
+		    if (roomba.facingEast()){
+				roomba.turnLeft();
+				if (roomba.frontIsClear()){
+					roomba.move();
+					roomba.turnLeft();
+				}
+				else{
+					break;
+				}
+			}
+			else {
+				turnRight();
+				if (roomba.frontIsClear()){
+				roomba.move();
+				turnRight();
+				}
+				else {
+					break;
+				}	
+			}
 			while (roomba.frontIsClear() == true){
 				roomba.move();
 				while (roomba.nextToABeeper()== true){
 					roomba.pickBeeper();
+					beeperCounter ++;
 				}
 			}
-			turnRight();
-			roomba.move();
-			turnRight();
-
-
-
-		
+		    if (roomba.facingEast()){
+				roomba.turnLeft();
+				if (roomba.frontIsClear()){
+				roomba.move();
+				roomba.turnLeft();
+				}
+				else{
+					break;
+				}
+			}
+			else if (roomba.facingWest()) {
+				turnRight();
+				if (roomba.frontIsClear()){
+				roomba.move();
+				turnRight();
+				}
+				else{
+					break;
+				}	
+			}
 
 		}
+		System.out.println("The number of beepers is: " + beeperCounter);
 
 	
 
 
   
+
 
 
 
