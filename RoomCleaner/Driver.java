@@ -4,6 +4,8 @@ import javax.swing.JOptionPane;  //may be necessary for input
 
 import kareltherobot.*;
 
+import java.util.ArrayList;
+
 public class Driver implements Directions {
 // declared here so it is visible in all the methods!! 
 // It will be assigned a value in the getInfo method
@@ -20,17 +22,22 @@ public class Driver implements Directions {
 		// LEAVE THIS ALONE!!!!!!
 		Driver d = new Driver();
 		Scanner scanner = new Scanner(System.in);
+		World.setDelay(EastVal);
 
-		System.out.print("Enter the strret number: ");
+		System.out.print("Enter the street number (y): ");
         String street = scanner.nextLine();
     	int numStreet = Integer.parseInt(street);
-		//System.out.println(street);
-		System.out.print("Enter the avenue number: ");
+		System.out.print("Enter the avenue number (x): ");
         String avenue = scanner.nextLine();
 		int numAvenue = Integer.parseInt(avenue);
-		//System.out.println(avenue);
 
 		int beeperCounter = 0;
+		int width = 0;
+		int length = 0;
+		int numOfPiles = 0;
+		ArrayList<Integer> pileList = new ArrayList<>();
+		int indPileCounter = 0;
+		
 
 
 
@@ -50,6 +57,7 @@ public class Driver implements Directions {
     String wrldName = "basicRoom.wld";
 
 		World.readWorld(wrldName);
+
     World.setVisible(true);
 
 
@@ -67,6 +75,10 @@ public class Driver implements Directions {
 		while (true){
 			while (roomba.frontIsClear() == true){
 				roomba.move();
+				width ++;
+				if (roomba.nextToABeeper()== true){
+					numOfPiles ++;
+				}
 				while (roomba.nextToABeeper()== true){
 					roomba.pickBeeper();
 					beeperCounter ++;
@@ -77,6 +89,7 @@ public class Driver implements Directions {
 				roomba.turnLeft();
 				if (roomba.frontIsClear()){
 					roomba.move();
+					length ++;
 					roomba.turnLeft();
 				}
 				else{
@@ -87,6 +100,7 @@ public class Driver implements Directions {
 				turnRight();
 				if (roomba.frontIsClear()){
 				roomba.move();
+				length ++;
 				turnRight();
 				}
 				else {
@@ -95,6 +109,10 @@ public class Driver implements Directions {
 			}
 			while (roomba.frontIsClear() == true){
 				roomba.move();
+				width ++;
+				if (roomba.nextToABeeper()== true){
+					numOfPiles ++;
+				}
 				while (roomba.nextToABeeper()== true){
 					roomba.pickBeeper();
 					beeperCounter ++;
@@ -104,6 +122,7 @@ public class Driver implements Directions {
 				roomba.turnLeft();
 				if (roomba.frontIsClear()){
 				roomba.move();
+ 				length ++;
 				roomba.turnLeft();
 				}
 				else{
@@ -114,6 +133,7 @@ public class Driver implements Directions {
 				turnRight();
 				if (roomba.frontIsClear()){
 				roomba.move();
+				length ++;
 				turnRight();
 				}
 				else{
@@ -123,6 +143,10 @@ public class Driver implements Directions {
 
 		}
 		System.out.println("The number of beepers is: " + beeperCounter);
+		//System.out.println("The width is " + width/(length+1));
+		//System.out.println("The length is " + length);
+		System.out.println("The area is " + length * (width/(length+1)));
+		System.out.println("The number of piles is:  " + numOfPiles);
 
 	
 
@@ -151,4 +175,3 @@ public class Driver implements Directions {
   }
 
 }
-
