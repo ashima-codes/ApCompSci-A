@@ -35,8 +35,8 @@ public class Driver implements Directions {
 		int width = 0;
 		int length = 0;
 		int numOfPiles = 0;
-		ArrayList<Integer> pileList = new ArrayList<>();
-		int indPileCounter = 0;
+		int largest = 0;
+		int beepersInPile = 0;
 		
 
 
@@ -82,7 +82,16 @@ public class Driver implements Directions {
 				while (roomba.nextToABeeper()== true){
 					roomba.pickBeeper();
 					beeperCounter ++;
+					beepersInPile ++;
+
 				}
+				if (beepersInPile > largest){
+					largest = beepersInPile;
+					beepersInPile = 0;
+					}
+					else{
+					beepersInPile = 0;						
+					}
 
 		}
 		    if (roomba.facingEast()){
@@ -116,7 +125,15 @@ public class Driver implements Directions {
 				while (roomba.nextToABeeper()== true){
 					roomba.pickBeeper();
 					beeperCounter ++;
+					beepersInPile ++;
 				}
+				if (beepersInPile > largest){
+					largest = beepersInPile;
+					beepersInPile = 0;
+					}
+				else{
+					beepersInPile = 0;						
+					}
 			}
 		    if (roomba.facingEast()){
 				roomba.turnLeft();
@@ -143,11 +160,11 @@ public class Driver implements Directions {
 
 		}
 		System.out.println("The number of beepers is: " + beeperCounter);
-		//System.out.println("The width is " + width/(length+1));
-		//System.out.println("The length is " + length);
 		System.out.println("The area is " + length * (width/(length+1)));
 		System.out.println("The number of piles is:  " + numOfPiles);
-
+	    System.out.println("The largest pile of beepers is "+ largest);
+		System.out.println("The average pile size is "+ (double)beeperCounter/(double)numOfPiles);
+		System.out.println("The percent dirty is "+ ((double)numOfPiles/((double) length * ((double)width/((double)length+1))))*10);
 	
 
 
