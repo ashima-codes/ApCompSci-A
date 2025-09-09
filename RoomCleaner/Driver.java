@@ -22,7 +22,7 @@ public class Driver implements Directions {
 		// LEAVE THIS ALONE!!!!!!
 		Driver d = new Driver();
 		Scanner scanner = new Scanner(System.in);
-		World.setDelay(EastVal);
+		//World.setDelay(EastVal);
 
 		System.out.print("Enter the street number (y): ");
         String street = scanner.nextLine();
@@ -37,7 +37,8 @@ public class Driver implements Directions {
 		int numOfPiles = 0;
 		int largest = 0;
 		int beepersInPile = 0;
-		
+		int largestStreet = 0;
+        int largestAvenue = 0;
 
 
 
@@ -88,6 +89,8 @@ public class Driver implements Directions {
 				if (beepersInPile > largest){
 					largest = beepersInPile;
 					beepersInPile = 0;
+                    largestStreet = roomba.street();
+                    largestAvenue = roomba.avenue();
 					}
 					else{
 					beepersInPile = 0;						
@@ -130,6 +133,8 @@ public class Driver implements Directions {
 				if (beepersInPile > largest){
 					largest = beepersInPile;
 					beepersInPile = 0;
+                    largestStreet = roomba.street();
+                    largestAvenue = roomba.avenue();
 					}
 				else{
 					beepersInPile = 0;						
@@ -159,19 +164,8 @@ public class Driver implements Directions {
 			}
 
 		}
-		System.out.println("The number of beepers is: " + beeperCounter);
-		System.out.println("The area is " + length * (width/(length+1)));
-		System.out.println("The number of piles is:  " + numOfPiles);
-	    System.out.println("The largest pile of beepers is "+ largest);
-		System.out.println("The average pile size is "+ (double)beeperCounter/(double)numOfPiles);
-		System.out.println("The percent dirty is "+ ((double)numOfPiles/((double) length * ((double)width/((double)length+1))))*10);
+
 	
-
-
-  
-
-
-
 
 
 
@@ -180,7 +174,13 @@ public class Driver implements Directions {
 	 * this info in the console (boring) or you can present using JOptionPane (cool!)
 	 */
 
-   // System.out.println("The biggest pile was ");
+		System.out.println("The number of beepers is: " + beeperCounter);
+		System.out.println("The area is " + length * (width/(length+1)));
+		System.out.println("The number of piles is:  " + numOfPiles);
+	    System.out.println("The largest pile of beepers is "+ largest);
+		System.out.println("The average pile size is "+ (double)beeperCounter/(double)numOfPiles);
+		System.out.println("The percent dirty is "+ ((double)numOfPiles/((double) length * ((double)width/((double)length+1))))*10);
+	    System.out.println("The largest pile is at" + "(" + largestStreet + "," + largestAvenue+ ")");
 
 
 
@@ -192,3 +192,4 @@ public class Driver implements Directions {
   }
 
 }
+
