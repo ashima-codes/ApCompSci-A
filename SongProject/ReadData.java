@@ -45,15 +45,36 @@ public class ReadData{
         }
         return title;
     }
-    public double getLoudestSong(Song[] list){
+    public String getLoudestSong(Song[] list){
         double loud = 0.0;
+        String theSong = "";
         for (int i = 0; i < 28371; i++){
             double newLoud = list[i].getLoudness();
             if(newLoud > loud){
                 loud = newLoud;
+                theSong = list[i].getTitle();
             }
         }
-        return loud;
-    }
-
+        return theSong; 
 }
+    public String getLowestShake (Song[] list) {
+        double shake = 1.0;
+        String aSong = "";
+        for (int i = 0; i < 28371; i++){
+            double newShake = list[i].getShake();
+            if(newShake < shake){
+                shake = newShake;
+                aSong = list[i].getTitle();
+            }
+        }
+        return aSong;
+    }
+}
+
+
+
+
+
+
+// line, artist, title, year, genre, lengh, , shakebaility, obscne, danceabilitym, lodness, topioc
+//public Song(String a, String g, String titl, String top, int y, int len, double dan,double loud, double ob, double shak) 
