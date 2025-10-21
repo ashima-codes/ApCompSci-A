@@ -45,6 +45,18 @@ public class ReadData{
         }
         return title;
     }
+    public String getLongestLength(Song[] list){
+        double length = 0.0;
+        String Song = "";
+        for (int i = 0; i < 28371; i++){
+            double newLength = list[i].getLength();
+            if(newLength > length){
+                length = newLength;
+                Song = list[i].getTitle();
+            }
+        }
+        return Song;
+    }
     public String getLoudestSong(Song[] list){
         double loud = 0.0;
         String theSong = "";
@@ -118,4 +130,5 @@ public class ReadData{
 
 // line, artist, title, year, genre, lengh, , shakebaility, obscne, danceabilitym, lodness, topioc
 //public Song(String a, String g, String titl, String top, int y, int len, double dan,double loud, double ob, double shak) 
+
 
