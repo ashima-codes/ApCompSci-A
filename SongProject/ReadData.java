@@ -131,18 +131,19 @@ public class ReadData{
         }
         return count;
     }
-    public double getAverageObscenity(Song[] list, int decade){
-        double obs = 0.0;
-        int counter = 0;
-        for (int i=0; i < list.length;i++){
-            if((list[i].getYear() < decade + 9 && list[i].getYear() > decade) || list[i].getYear() == decade){
-                double a = list[i].getObscene();
-                obs +=a;
-                counter ++;
+    public double getAverageObscenity(Song[] list, int startYear){
+        double endYear = startYear+9;
+        double total= 0.0;
+        int count = 0;
+        for (int i = 0; i < list.length;i++){
+            Song s = list[i];
+            if ( s!= null && s.getYear() >= startYear && s.getYear()<= endYear){
+                total += s.getObscene();
+                count++;
             }
         }
-        double average = obs/counter;
-        return average;
+        if (count ==0) return 0.0;
+        return total/count;
         }
     
 }
@@ -154,6 +155,7 @@ public class ReadData{
 
 // line, artist, title, year, genre, lengh, , shakebaility, obscne, danceabilitym, lodness, topioc
 //public Song(String a, String g, String titl, String top, int y, int len, double dan,double loud, double ob, double shak) 
+
 
 
 
