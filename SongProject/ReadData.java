@@ -56,7 +56,7 @@ public class ReadData{
             }
         }
         return theSong; 
-}
+    }
     public String getLowestShake (Song[] list) {
         double shake = 1.0;
         String aSong = "";
@@ -69,6 +69,46 @@ public class ReadData{
         }
         return aSong;
     }
+    public int danceabilityRating (Song[] list){
+        int numOfRating = 0;
+        for (int i = 0; i< 28371; i++){
+            double newRating = list[i].getDance();
+            if (newRating > 0.80){
+                numOfRating ++;
+            }
+        }
+        return numOfRating;
+    }
+    public int totalFrom1982(Song[] list){
+        int total = 0;
+        for (int i = 0; i < 28371; i++){
+            int year = list[i].getYear();
+            if (year == 1982){
+                total++;
+            }
+        }
+        return total;
+    }
+    public int totalFrom2000(Song[] list){
+        int total = 0;
+        for (int i = 0; i < 28371; i++){
+            int year = list[i].getYear();
+            if (year == 2000){
+                total++;
+            }
+        }
+        return total;
+    }
+    public int totalFrom2015(Song[] list){
+        int total = 0;
+        for (int i = 0; i < 28371; i++){
+            int year = list[i].getYear();
+            if (year == 2015){
+                total++;
+            }
+        }
+        return total;
+    }
 }
 
 
@@ -78,3 +118,4 @@ public class ReadData{
 
 // line, artist, title, year, genre, lengh, , shakebaility, obscne, danceabilitym, lodness, topioc
 //public Song(String a, String g, String titl, String top, int y, int len, double dan,double loud, double ob, double shak) 
+
