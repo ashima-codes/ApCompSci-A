@@ -9,27 +9,35 @@ public class Book
   public String pigLatin(String word)
   {
     String newWord = "";
+    String vowels = "aeiou";
+    String numbers = "0123456789";
     String firstLetter = word.substring(0,1);
     //System.out.println(*****firstLetter***)
-    //if (firstLetter == "a"||firstLetter == "e"||firstLetter == "i"||firstLetter == "o"||firstLetter == "u"){
-    if (firstLetter == "e"){
+    if (word.length() == 0){
+      return word;
+    }
+    if(vowels.indexOf(word.substring(0,1))>0){
       newWord = word + "yay";
-      System.out.println(newWord);
+      return newWord;
+    }
+    if(numbers.indexOf(word.substring(0,1))>0){
+      return word + "ay";
+    }
+    if (word.length()==1){
+      return word + "ay";
     }
     else{
-      //int whereIsVowel = 0;
-      //for (int i=0; i< word.length(); i ++){
-        //if (word.substring(i,i+1) == "a" ||word.substring(i,i+1) == "e" ||word.substring(i,i+1) == "i"||word.substring(i,i+1) == "o"||word.substring(i,i+1) == "u" ){
-          //whereIsVowel = i;
-          //System.out.println(word.substring(i,i+1));
-          //break;
-        //}
-      //newWord = word.substring(i) + word.substring(0,i) + "ay";
-      //}
-      System.out.println("reached else");
+      for (int i = 0; i < word.length(); i++){
+        if (vowels.indexOf(word.substring(i, i+1))> 0){
+          String left = word.substring(0, i);
+          String right = word.substring(i);
+          return  right + left +"ay";
+        }
+      }
     }
-    return newWord;
+    return word;
   }
+
   
   public int endPunctuation(String word)  //return the index of where the punctuation is at the end of a String. If it is all punctuation return 0, if there is no punctuation return -1
   {
@@ -52,3 +60,4 @@ public class Book
     return retSentence;
   }
 }  
+
