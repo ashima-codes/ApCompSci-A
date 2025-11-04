@@ -11,7 +11,6 @@ public class Book
     String newWord = "";
     String vowels = "aeiou";
     String numbers = "0123456789";
-    String firstLetter = word.substring(0,1);
     //System.out.println(*****firstLetter***)
     if (word.length() == 0){
       return word;
@@ -38,11 +37,34 @@ public class Book
     return word;
   }
 
-  
-  public int endPunctuation(String word)  //return the index of where the punctuation is at the end of a String. If it is all punctuation return 0, if there is no punctuation return -1
+  public String endPunctuation(String word)  //return the index of where the punctuation is at the end of a String. If it is all punctuation return 0, if there is no punctuation return -1
   {
+    //char firstLetter = word.charAt(0);
+    String newWord = "";
+    int lenOfWord = word.length();
+    int indexOfPun = 0;
+    String finalWord = "";
+    String punctuation = "!.?;:,";
+      for (int i = lenOfWord-1; i >=0; i--){
+          if (punctuation.indexOf(word.substring(i))>= 0){
+            indexOfPun = i;
+            //newWord = word.substring(0, i);
+          }
+          else {
+            indexOfPun = -1;
+            break;
+          }
+      }
+      if (indexOfPun > 0){
+          finalWord = pigLatin(word.substring(0, indexOfPun)) + word.substring(indexOfPun);
+          return finalWord;
+      }
+      else{
+        return pigLatin(word);
+      }
 
-    return -1;
+      //return newWord;
+    // -1;
   }
 
   public String translateWord(String word)    //to share with class
@@ -60,4 +82,3 @@ public class Book
     return retSentence;
   }
 }  
-
