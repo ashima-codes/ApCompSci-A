@@ -9,25 +9,25 @@ public class Book
   public String pigLatin(String word)
   {
     String newWord = "";
-    String vowels = "aeiou";
+    String vowels = "aeiouAEIOU";
     String numbers = "0123456789";
     //System.out.println(*****firstLetter***)
     if (word.length() == 0){
       return word;
     }
-    if(vowels.indexOf(word.substring(0,1))>0){
+    if(vowels.indexOf(word.substring(0,1))>=0){
       newWord = word + "yay";
       return newWord;
     }
-    if(numbers.indexOf(word.substring(0,1))>0){
+    if(numbers.indexOf(word.substring(0,1))>=0){
       return word + "ay";
     }
     if (word.length()==1){
       return word + "ay";
     }
-    else{
+    else {
       for (int i = 0; i < word.length(); i++){
-        if (vowels.indexOf(word.substring(i, i+1))> 0){
+        if (vowels.indexOf(word.substring(i, i+1))>= 0){
           String left = word.substring(0, i);
           String right = word.substring(i);
           return  right + left +"ay";
@@ -40,31 +40,39 @@ public class Book
   public String endPunctuation(String word)  //return the index of where the punctuation is at the end of a String. If it is all punctuation return 0, if there is no punctuation return -1
   {
     //char firstLetter = word.charAt(0);
-    String newWord = "";
     int lenOfWord = word.length();
-    int indexOfPun = 0;
+    String puncInIt = "";
     String finalWord = "";
-    String punctuation = "!.?;:,";
+    int indexOfPunc = 0;
+    String punctuation = "?.!;:,";
+    boolean case1 = false;
+
+    if (Character.isUpperCase(word.charAt(0))){
+      case1 = true;
+    }
       for (int i = lenOfWord-1; i >=0; i--){
-          if (punctuation.indexOf(word.substring(i))>= 0){
-            indexOfPun = i;
-            //newWord = word.substring(0, i);
+          if (punctuation.indexOf(word.substring(i, i+1)) >= 0){
+            puncInIt += word.substring(i,i+1);
+            indexOfPunc = i;
           }
           else {
-            indexOfPun = -1;
             break;
           }
       }
-      if (indexOfPun > 0){
-          finalWord = pigLatin(word.substring(0, indexOfPun)) + word.substring(indexOfPun);
-          return finalWord;
+      if (indexOfPunc != 0){
+        if (case1 == true){
+          finalWord = pigLatin(word.substring(0, indexOfPunc)) + puncInIt;
+          String actualWord = finalWord.substring(0,1).toUpperCase()+finalWord.substring(1).toLowerCase();
+          return actualWord;
+        }
+        else{
+        finalWord = pigLatin(word.substring(0, indexOfPunc)) + puncInIt;
+        return finalWord;
+        }
       }
       else{
         return pigLatin(word);
       }
-
-      //return newWord;
-    // -1;
   }
 
   public String translateWord(String word)    //to share with class
