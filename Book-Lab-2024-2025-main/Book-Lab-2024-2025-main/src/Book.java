@@ -3,6 +3,7 @@
 //Words will be separated by spaces. 
 //There can be punctuation in a word, we will only add/keep punctuation at the end of a string if it is at the end of a string.
 //    for examples: Hello.==> Ellohay.    Good-bye! ==> Ood-byegay!    so... ==> osay...
+import java.util.ArrayList; 
 
 public class Book
 {
@@ -82,11 +83,19 @@ public class Book
     return convertedWord;
   }
 
-  public String translateSentence(String sentence)
+  public ArrayList translateSentence(String sentence)
   {
-    String retSentence = "";
-
-
-    return retSentence;
+  String newSentence = "";
+  ArrayList<String> words = new ArrayList<String>();
+  int start = 0;
+    for (int i = 0; i< sentence.length(); i++){
+      char ch = sentence.charAt(i);
+      if (String.valueOf(ch).equals(" ")){
+        words.add(sentence.substring(start, i)); // begining index needs to be changed
+        start += i + 1;
+      }
+    }
+      return words; // only returns the ArrayList not the translated version
+    //return newSentence;
   }
 }  
