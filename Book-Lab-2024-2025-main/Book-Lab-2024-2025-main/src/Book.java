@@ -44,7 +44,7 @@ public class Book
     int lenOfWord = word.length();
     String puncInIt = "";
     String finalWord = "";
-    int indexOfPunc = 0;
+    int indexOfPunc = -1;
     String punctuation = "?.!;:,";
     boolean case1 = false;
 
@@ -60,7 +60,7 @@ public class Book
             break;
           }
       }
-      if (indexOfPunc != 0){
+      if (indexOfPunc != -1){
         if (case1 == true){
           finalWord = pigLatin(word.substring(0, indexOfPunc)) + puncInIt;
           String actualWord = finalWord.substring(0,1).toUpperCase()+finalWord.substring(1).toLowerCase();
@@ -72,7 +72,14 @@ public class Book
         }
       }
       else{
-        return pigLatin(word);
+        if (case1 == true){
+          finalWord = pigLatin(word);
+          String actualWord = finalWord.substring(0,1).toUpperCase()+finalWord.substring(1).toLowerCase();
+          return actualWord;
+        }
+        else{
+          return pigLatin(word);
+        }
       }
   }
 
@@ -83,19 +90,21 @@ public class Book
     return convertedWord;
   }
 
-  public ArrayList translateSentence(String sentence)
+  public String translateSentence(String sentence)
   {
   String newSentence = "";
-  ArrayList<String> words = new ArrayList<String>();
   int start = 0;
+  String space = " ";
     for (int i = 0; i< sentence.length(); i++){
-      char ch = sentence.charAt(i);
-      if (String.valueOf(ch).equals(" ")){
-        words.add(sentence.substring(start, i)); // begining index needs to be changed
-        start += i + 1;
+      if (sentence.substring(i, i+1).equals(space)){
+        newSentence += (endPunctuation(sentence.substring(start, i)) + " ");
+        start = i + 1;
       }
     }
-      return words; // only returns the ArrayList not the translated version
-    //return newSentence;
+    if (start != sentence.length()){
+      newSentence += (endPunctuation(sentence.substring(start, sentence.length())));
+    }
+    return newSentence; 
   }
 }  
+
