@@ -1,12 +1,46 @@
-//A few assumptions.......
-
-//Words will be separated by spaces. 
-//There can be punctuation in a word, we will only add/keep punctuation at the end of a string if it is at the end of a string.
-//    for examples: Hello.==> Ellohay.    Good-bye! ==> Ood-byegay!    so... ==> osay...
-import java.util.ArrayList; 
+import java.io.IOException;
+import java.util.Scanner;
+import java.net.URL;
+import java.io.FileWriter;
 
 public class Book
 {
+  private String book;
+  public Book (String url){
+    readBook(url);
+  }
+
+  private void readBook(String link){
+    try{
+      URL url = new URL(link);
+      Scanner s = new Scanner(url.openStream());
+
+      while(s.hasNext()){
+        String text = s.nextLine();
+        String translatedText = translateSentence(text);
+        book += translatedText;
+      }
+    }
+    catch(IOException ex){
+      ex.printStackTrace();
+    }
+  }
+
+  public void writeToFile()
+  {
+    String content = book;
+    String fileName = "transaltedBook.txt";
+
+      try (FileWriter writer = new FileWriter(fileName)) { // Automatically closes the writer
+        writer.write(content);
+        System.out.println("String successfully written to " + fileName);
+      } 
+      catch (IOException e) {
+        System.err.println("Error writing to file: " + e.getMessage());
+      }
+  }
+
+
   public String pigLatin(String word)
   {
     String newWord = "";
