@@ -2,23 +2,25 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.net.URL;
 import java.io.FileWriter;
+import java.io.BufferedWriter;
 
 public class Book
 {
   private String book;
   public Book (String url){
-    readBook(url);
+   // readBook(url);
+   book = url;
   }
 
-  private void readBook(String link){
+  public void readBook(){
     try{
-      URL url = new URL(link);
+      URL url = new URL(book);
       Scanner s = new Scanner(url.openStream());
 
       while(s.hasNext()){
         String text = s.nextLine();
-        String translatedText = translateSentence(text);
-        book += translatedText;
+        writeToFile(text);
+        //book+= text;
       }
     }
     catch(IOException ex){
@@ -26,18 +28,17 @@ public class Book
     }
   }
 
-  public void writeToFile()
+  public void writeToFile(String t)
   {
-    String content = book;
-    String fileName = "transaltedBook.txt";
-
-      try (FileWriter writer = new FileWriter(fileName)) { // Automatically closes the writer
-        writer.write(content);
-        System.out.println("String successfully written to " + fileName);
-      } 
-      catch (IOException e) {
-        System.err.println("Error writing to file: " + e.getMessage());
-      }
+    try{
+      BufferedWriter fileWriter = new BufferedWriter(new FileWriter("translatedBook.txt", true));
+      System.out.println(t);
+      fileWriter.write(translateSentence(t));
+    // fileWriter.close();
+    }
+    catch(IOException e) {
+      System.out.println("Some error");
+    }
   }
 
 
@@ -117,12 +118,12 @@ public class Book
       }
   }
 
-  public String translateWord(String word)    //to share with class
-  {
-    String convertedWord = "";
+  //public String translateWord(String word)    //to share with class
+  //{
+    //String convertedWord = "";
 
-    return convertedWord;
-  }
+    //return convertedWord;
+  //}
 
   public String translateSentence(String sentence)
   {
@@ -141,4 +142,3 @@ public class Book
     return newSentence; 
   }
 }  
-
