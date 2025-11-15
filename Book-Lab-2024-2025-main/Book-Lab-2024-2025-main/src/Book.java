@@ -7,9 +7,21 @@ import java.io.BufferedWriter;
 public class Book
 {
   private String book;
-  public Book (String url){
-   // readBook(url);
-   book = url;
+  private BufferedWriter writer;
+  int count = 0;
+
+  public Book(String url){
+    book = url;
+    try {
+      writer = new BufferedWriter(new FileWriter("translatedBook.txt"));
+    } 
+    catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+  
+  public int getWordCount(){
+    return count;
   }
 
   public void readBook(){
@@ -17,11 +29,12 @@ public class Book
       URL url = new URL(book);
       Scanner s = new Scanner(url.openStream());
 
-      while(s.hasNext()){
+      while(s.hasNextLine()){
         String text = s.nextLine();
         writeToFile(text);
-        //book+= text;
       }
+
+      writer.close();   
     }
     catch(IOException ex){
       ex.printStackTrace();
@@ -31,10 +44,8 @@ public class Book
   public void writeToFile(String t)
   {
     try{
-      BufferedWriter fileWriter = new BufferedWriter(new FileWriter("translatedBook.txt", true));
-      System.out.println(t);
-      fileWriter.write(translateSentence(t));
-    // fileWriter.close();
+      writer.write(translateSentence(t));
+      writer.newLine();    
     }
     catch(IOException e) {
       System.out.println("Some error");
@@ -82,7 +93,10 @@ public class Book
     int indexOfPunc = -1;
     String punctuation = "?.!;:,";
     boolean case1 = false;
-
+    count ++;
+    if (word == null || word.length()==0){
+      return "";
+    }
     if (Character.isUpperCase(word.charAt(0))){
       case1 = true;
     }
@@ -114,7 +128,7 @@ public class Book
         }
         else{
           return pigLatin(word);
-        }
+        } 
       }
   }
 
